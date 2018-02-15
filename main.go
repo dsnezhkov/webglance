@@ -57,6 +57,8 @@ func main() {
 	// disconnect when done
 	defer remote.Close()
 
+	remote.SetVisibleSize(1280, 1696)
+
 	// read urls from file
 	// format per line http(s)://host[:port]
 	content, err := ioutil.ReadFile(*urlfile)
@@ -121,6 +123,7 @@ func main() {
 
 func screen(remote *godet.RemoteDebugger, urlstr string, fileName string, outdir *string, pagedelay *int) {
 	var err error
+
 	// create new tab
 	tab, _ := remote.NewTab(urlstr)
 
@@ -139,7 +142,7 @@ func screen(remote *godet.RemoteDebugger, urlstr string, fileName string, outdir
 	}
 
 	// save page as PDF (long pages / content)
-	err = remote.SavePDF(fmt.Sprintf("%s/%s.pdf", *outdir, fileName), 0644, godet.PortraitMode(), godet.Scale(1.0), godet.Dimensions(6.0, 4.0))
+	err = remote.SavePDF(fmt.Sprintf("%s/%s.pdf", *outdir, fileName), 0644, godet.PortraitMode(), godet.Scale(1.0))
 	if err != nil {
 		log.Printf("Unable to save PDF (%s)\n", err)
 	}
