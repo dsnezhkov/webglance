@@ -1,0 +1,4 @@
+https://google.com:443
+#https://ibm.com
+https://msn.com
+https://amazon.com
